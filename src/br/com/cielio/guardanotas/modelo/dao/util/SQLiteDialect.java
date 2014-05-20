@@ -53,7 +53,6 @@ public class SQLiteDialect extends Dialect {
 				Hibernate.STRING));
 	}
 
-        
 	public boolean supportsIdentityColumns() {
 		return true;
 	}

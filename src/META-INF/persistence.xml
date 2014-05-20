@@ -12,10 +12,11 @@
 			<property name="hibernate.connection.driver_class" value="org.sqlite.JDBC" />
 			<property name="hibernate.connection.url" value="jdbc:sqlite:notas.db" />
 			<property name="hibernate.connection.charSet" value="UTF-8"/>
-<!--             <property name="hibernate.hbm2ddl.auto" value="create" /> -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+                                <!--Deleta a tabela e cria uma nova-->
+                   <!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+                   <!-- <property name="hibernate.hbm2ddl.auto" value="update"/>-->
  
-            <!--Configuracoes de Debug-->
+                                <!--Configuracoes de Debug-->
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="use_sql_comments" value="true" />
