@@ -7,7 +7,6 @@ package br.com.cielio.guardanotas.visualizacao;
 
 import br.com.cielio.guardanotas.controle.ControladorNota;
 import br.com.cielio.guardanotas.modelo.Nota;
-import java.awt.event.MouseListener;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.event.ListSelectionEvent;
@@ -25,8 +24,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     public FormPrincipal() {
         initComponents();
         listarNotas();
-        //getItemSelecionado();
-
     }
 
     /**
@@ -172,11 +169,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     public final void listarNotas() {
         ControladorNota controladorNota = new ControladorNota();
 
-        /*DefaultListModel<Nota> model = new DefaultListModel<>();
-        
-         for (Nota nota : controladorNota.listar()) {
-         model.addElement(nota);
-         }*/
         jListTitulo.setListData(new Vector(controladorNota.listar()));
 
         jListTitulo.setPreferredSize(new java.awt.Dimension(150, (controladorNota.listar().size() * 21)));

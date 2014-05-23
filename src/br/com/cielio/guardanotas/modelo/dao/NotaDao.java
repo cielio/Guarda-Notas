@@ -41,7 +41,7 @@ public class NotaDao {
     }
     
     public ArrayList<Nota> listar()
-    {
-        return (ArrayList<Nota>) entityManager.createQuery("from Nota").getResultList();
+    {//SELECT e FROM Professor e ORDER BY e.name DESC
+        return (ArrayList<Nota>) entityManager.createQuery("SELECT e FROM Nota e ORDER BY e.id DESC").getResultList();
     }
 }
