@@ -7,7 +7,7 @@
 package br.com.cielio.guardanotas.modelo.dao;
 
 import br.com.cielio.guardanotas.modelo.Nota;
-import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 /**
@@ -40,8 +40,8 @@ public class NotaDao {
         return entityManager.getReference(Nota.class, id);
     }
     
-    public List<Nota> listar()
+    public ArrayList<Nota> listar()
     {
-        return entityManager.createQuery("from Nota").getResultList();
+        return (ArrayList<Nota>) entityManager.createQuery("from Nota").getResultList();
     }
 }

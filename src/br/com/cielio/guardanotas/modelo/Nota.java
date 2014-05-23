@@ -81,6 +81,11 @@ public class Nota {
         this.data = data;
     }
     
+    public String toString()
+    {
+        return getTitulo();
+    }
+    
     
     
 }

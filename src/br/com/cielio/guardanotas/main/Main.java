@@ -9,6 +9,7 @@ package br.com.cielio.guardanotas.main;
 import br.com.cielio.guardanotas.controle.ControladorNota;
 import br.com.cielio.guardanotas.modelo.Nota;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +22,11 @@ public class Main {
     public static void main(String[] args) {
         
         ControladorNota controladorNota = new ControladorNota();
-    
-        controladorNota.adicionar("Olá Mundo", "O mundo é muito grande",
-                new Date("17/05/2014"));
+
+        Date date = new Date();
+        date.getTime();
+        //controladorNota.adicionar("Aula pascal", "Ja é melhor",
+         //    date);
         
         List <Nota> notas = controladorNota.listar();
         
@@ -31,7 +34,7 @@ public class Main {
         
         for (Nota nota : notas) {
             System.out.println("titulo "+nota.getTitulo()+"\nConteudo\n"+nota.getConteudo()+"Data "
-                    +simpleDateFormat.format(nota.getData()));
+                    +simpleDateFormat.format(nota.getData().getTime()));
         }
     }
 }
