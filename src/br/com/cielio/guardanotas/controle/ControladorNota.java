@@ -29,6 +29,17 @@ public class ControladorNota {
         entityManager.close();
     }
     
+    public void atualizar(Nota nota)
+    {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        NotaDao notaDao = new NotaDao(entityManager);
+        
+        entityManager.getTransaction().begin();
+        notaDao.atualizar(nota);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+    
     public ArrayList<Nota> listar()
     {
         EntityManager entityManager = JpaUtil.getEntityManager();
@@ -41,5 +52,31 @@ public class ControladorNota {
         
         return notas;
     }
+    
+    public Nota buscar(Long id)
+    {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        NotaDao notaDao = new NotaDao(entityManager);
+        
+        entityManager.getTransaction().begin();
+        Nota nota = notaDao.buscar(id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        
+        return nota;
+    }
+    
+    public void excluir(Long id)
+    {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        NotaDao notaDao = new NotaDao(entityManager);
+        
+        entityManager.getTransaction().begin();
+        notaDao.excluir(id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+        
+    
     
 }

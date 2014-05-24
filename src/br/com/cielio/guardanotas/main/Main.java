@@ -9,7 +9,6 @@ package br.com.cielio.guardanotas.main;
 import br.com.cielio.guardanotas.controle.ControladorNota;
 import br.com.cielio.guardanotas.modelo.Nota;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

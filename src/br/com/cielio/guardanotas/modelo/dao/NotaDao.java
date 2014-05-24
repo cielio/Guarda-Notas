@@ -30,8 +30,14 @@ public class NotaDao {
         entityManager.persist(nota);
     }
     
-    public void excluir(Nota nota)
+    public void atualizar(Nota nota)
     {
+        entityManager.merge(nota);
+    }
+    
+    public void excluir(Long id)
+    {
+        Nota nota = entityManager.find(Nota.class, id);
         entityManager.remove(nota);
     }
     
@@ -41,7 +47,8 @@ public class NotaDao {
     }
     
     public ArrayList<Nota> listar()
-    {//SELECT e FROM Professor e ORDER BY e.name DESC
-        return (ArrayList<Nota>) entityManager.createQuery("SELECT e FROM Nota e ORDER BY e.id DESC").getResultList();
+    {
+        return (ArrayList<Nota>) entityManager.createQuery("SELECT n FROM Nota n ORDER BY n.id DESC").getResultList();
     }
+    
 }

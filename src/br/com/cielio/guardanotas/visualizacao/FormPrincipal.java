@@ -43,9 +43,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTextFieldTitulo = new javax.swing.JTextField();
         jButtonAdiciona = new javax.swing.JButton();
         jButtonDeleta = new javax.swing.JButton();
+        jButtonSalva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        setTitle("Guarda Notas");
 
         jScrollPaneJListTitulo.setMaximumSize(new java.awt.Dimension(500, 600));
         jScrollPaneJListTitulo.setMinimumSize(new java.awt.Dimension(50, 400));
@@ -78,6 +79,18 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         jButtonDeleta.setText("Deletar");
+        jButtonDeleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletaActionPerformed(evt);
+            }
+        });
+
+        jButtonSalva.setText("Salvar");
+        jButtonSalva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,26 +98,30 @@ public class FormPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSplitPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonAdiciona)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonDeleta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSalva)
+                        .addGap(0, 81, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(220, Short.MAX_VALUE)
-                .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonAdiciona)
-                .addGap(10, 10, 10)
-                .addComponent(jButtonDeleta)
-                .addGap(196, 196, 196))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAdiciona)
-                    .addComponent(jButtonDeleta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButtonDeleta)
+                    .addComponent(jButtonSalva))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -117,14 +134,16 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAdicionaActionPerformed
 
     private void jListTituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListTituloMouseClicked
-
-        if (jListTitulo.getSelectedIndex() > -1) {
-            Nota nota;
-            
-            nota = (Nota) jListTitulo.getSelectedValue();
-            jTextPaneConteudo.setText(nota.getConteudo());
-        }
+        getItemSelecionado();
     }//GEN-LAST:event_jListTituloMouseClicked
+
+    private void jButtonDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletaActionPerformed
+        excluirItemSelecionado();
+    }//GEN-LAST:event_jButtonDeletaActionPerformed
+
+    private void jButtonSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvaActionPerformed
+        atualizarItemSelecionado();
+    }//GEN-LAST:event_jButtonSalvaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +177,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdiciona;
     private javax.swing.JButton jButtonDeleta;
+    private javax.swing.JButton jButtonSalva;
     private javax.swing.JList jListTitulo;
     private javax.swing.JScrollPane jScrollPaneJListTitulo;
     private javax.swing.JScrollPane jScrollPaneJTextPane;
@@ -194,17 +214,43 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
 
     public final void getItemSelecionado() {
-        jListTitulo.addListSelectionListener(new ListSelectionListener() {
-            Nota nota = new Nota();
 
-            @Override
-            public void valueChanged(ListSelectionEvent arg0) {
-                if (!arg0.getValueIsAdjusting()) {
-                    nota = (Nota) jListTitulo.getSelectedValue();
-                    jTextPaneConteudo.setText(nota.getConteudo());
-                }
-            }
-        });
+        if (jListTitulo.getSelectedIndex() > -1) {
+            Nota nota;
+
+            nota = (Nota) jListTitulo.getSelectedValue();
+            jTextPaneConteudo.setText(String.valueOf(nota.getConteudo()));
+        }
     }
 
+    public final void excluirItemSelecionado() {
+
+        if (jListTitulo.getSelectedIndex() > -1) {
+            ControladorNota controladorNota = new ControladorNota();
+
+            Nota nota = (Nota) jListTitulo.getSelectedValue();
+            
+            controladorNota.excluir(nota.getId());
+            
+            listarNotas();
+            
+            jTextPaneConteudo.setText("");
+        }
+    }
+    
+    public final void atualizarItemSelecionado() {
+
+        if (jListTitulo.getSelectedIndex() > -1) {
+            ControladorNota controladorNota = new ControladorNota();
+
+            Nota nota = (Nota) jListTitulo.getSelectedValue();
+            
+            nota.setConteudo(jTextPaneConteudo.getText());
+            controladorNota.atualizar(nota);
+            
+            listarNotas();
+            
+            jTextPaneConteudo.setText("");
+        }
+    }
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.cielio.guardanotas.modelo;
 
 import java.util.Date;
@@ -21,13 +20,13 @@ import javax.persistence.Temporal;
 @Entity
 @SuppressWarnings({"ValidAttributes", "SerializableClass"})
 public class Nota {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column
     private String titulo;
-    @Column 
+    @Column
     private String conteudo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
@@ -35,8 +34,12 @@ public class Nota {
     /**
      * @return the id
      */
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -80,12 +83,9 @@ public class Nota {
     public void setData(Date data) {
         this.data = data;
     }
-    
-    public String toString()
-    {
+
+    public String toString() {
         return getTitulo();
     }
-    
-    
-    
+
 }
