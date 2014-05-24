@@ -53,6 +53,19 @@ public class ControladorNota {
         return notas;
     }
     
+        public ArrayList<Nota> listar(String str)
+    {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        NotaDao notaDao = new NotaDao(entityManager);
+        
+        entityManager.getTransaction().begin();
+        ArrayList<Nota> notas = notaDao.listar(str);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        
+        return notas;
+    }
+    
     public Nota buscar(Long id)
     {
         EntityManager entityManager = JpaUtil.getEntityManager();

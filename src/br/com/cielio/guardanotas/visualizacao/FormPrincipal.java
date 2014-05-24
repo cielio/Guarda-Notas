@@ -9,8 +9,8 @@ import br.com.cielio.guardanotas.controle.ControladorNota;
 import br.com.cielio.guardanotas.modelo.Nota;
 import java.util.Date;
 import java.util.Vector;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -24,6 +24,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     public FormPrincipal() {
         initComponents();
         listarNotas();
+        //Adiciona o evento ao jTextFieldBusca para manipula o campo busca
+        addEventoTextChange();
     }
 
     /**
@@ -44,6 +46,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jButtonAdiciona = new javax.swing.JButton();
         jButtonDeleta = new javax.swing.JButton();
         jButtonSalva = new javax.swing.JButton();
+        jTextFieldBusca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Guarda Notas");
@@ -101,15 +104,16 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSplitPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonAdiciona)
                         .addGap(10, 10, 10)
                         .addComponent(jButtonDeleta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSalva)
-                        .addGap(0, 81, Short.MAX_VALUE)))
+                        .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,7 +124,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAdiciona)
                     .addComponent(jButtonDeleta)
-                    .addComponent(jButtonSalva))
+                    .addComponent(jButtonSalva)
+                    .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
@@ -182,6 +187,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneJListTitulo;
     private javax.swing.JScrollPane jScrollPaneJTextPane;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextField jTextFieldBusca;
     private javax.swing.JTextField jTextFieldTitulo;
     private javax.swing.JTextPane jTextPaneConteudo;
     // End of variables declaration//GEN-END:variables
@@ -192,6 +198,35 @@ public class FormPrincipal extends javax.swing.JFrame {
         jListTitulo.setListData(new Vector(controladorNota.listar()));
 
         jListTitulo.setPreferredSize(new java.awt.Dimension(150, (controladorNota.listar().size() * 21)));
+    }
+
+    public final void listarNotas(String str) {
+        ControladorNota controladorNota = new ControladorNota();
+
+        jListTitulo.setListData(new Vector(controladorNota.listar(str)));
+
+        jListTitulo.setPreferredSize(new java.awt.Dimension(150, (controladorNota.listar().size() * 21)));
+    }
+
+    public final void addEventoTextChange() {
+        
+        // Listen for changes in the text
+        jTextFieldBusca.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                // text was changed
+                listarNotas(jTextFieldBusca.getText());
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                // text was deleted
+                listarNotas(jTextFieldBusca.getText());
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                // text was inserted
+                listarNotas(jTextFieldBusca.getText());
+            }
+        });
     }
 
     public void adicionarNota() {
@@ -229,27 +264,27 @@ public class FormPrincipal extends javax.swing.JFrame {
             ControladorNota controladorNota = new ControladorNota();
 
             Nota nota = (Nota) jListTitulo.getSelectedValue();
-            
+
             controladorNota.excluir(nota.getId());
-            
+
             listarNotas();
-            
+
             jTextPaneConteudo.setText("");
         }
     }
-    
+
     public final void atualizarItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
             ControladorNota controladorNota = new ControladorNota();
 
             Nota nota = (Nota) jListTitulo.getSelectedValue();
-            
+
             nota.setConteudo(jTextPaneConteudo.getText());
             controladorNota.atualizar(nota);
-            
+
             listarNotas();
-            
+
             jTextPaneConteudo.setText("");
         }
     }

@@ -28,16 +28,17 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSplitPane1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
-                      <Component id="jTextFieldTitulo" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jTextFieldBusca" min="-2" pref="189" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTitulo" min="-2" pref="113" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonAdiciona" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="jButtonDeleta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonSalva" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="81" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="86" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -53,6 +54,7 @@
                   <Component id="jButtonAdiciona" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonDeleta" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSalva" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldBusca" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSplitPane1" pref="538" max="32767" attributes="0"/>
@@ -156,6 +158,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldBusca">
     </Component>
   </SubComponents>
 </Form>
