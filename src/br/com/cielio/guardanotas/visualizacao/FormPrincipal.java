@@ -73,7 +73,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jScrollPaneJListTitulo);
 
-        jTextPaneConteudo.setBackground(new java.awt.Color(248, 248, 248));
+        jTextPaneConteudo.setEditable(false);
         jTextPaneConteudo.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jTextPaneConteudo.setPreferredSize(new java.awt.Dimension(6, 400));
         jScrollPaneJTextPane.setViewportView(jTextPaneConteudo);
@@ -81,9 +81,17 @@ public class FormPrincipal extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jScrollPaneJTextPane);
 
         jTextFieldTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jTextFieldTitulo.setToolTipText("Digite um nome para a nota.");
+        jTextFieldTitulo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldTituloFocusGained(evt);
+            }
+        });
 
         jButtonAdiciona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_new.png"))); // NOI18N
-        jButtonAdiciona.setPreferredSize(new java.awt.Dimension(50, 30));
+        jButtonAdiciona.setToolTipText("Adicionar nota.");
+        jButtonAdiciona.setEnabled(false);
+        jButtonAdiciona.setPreferredSize(new java.awt.Dimension(33, 33));
         jButtonAdiciona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAdicionaActionPerformed(evt);
@@ -91,6 +99,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         jButtonDeleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_remove.png"))); // NOI18N
+        jButtonDeleta.setToolTipText("Excluir nota.");
+        jButtonDeleta.setEnabled(false);
+        jButtonDeleta.setMaximumSize(new java.awt.Dimension(33, 33));
+        jButtonDeleta.setMinimumSize(new java.awt.Dimension(33, 33));
+        jButtonDeleta.setPreferredSize(new java.awt.Dimension(33, 33));
         jButtonDeleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeletaActionPerformed(evt);
@@ -98,6 +111,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         jButtonSalva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_save.png"))); // NOI18N
+        jButtonSalva.setToolTipText("Salvar alterações.");
+        jButtonSalva.setEnabled(false);
+        jButtonSalva.setMaximumSize(new java.awt.Dimension(33, 33));
+        jButtonSalva.setMinimumSize(new java.awt.Dimension(33, 33));
+        jButtonSalva.setPreferredSize(new java.awt.Dimension(33, 33));
         jButtonSalva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvaActionPerformed(evt);
@@ -105,10 +123,25 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         jTextFieldBusca.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jTextFieldBusca.setToolTipText("Pesquisar");
 
         jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_edit1.png"))); // NOI18N
+        jButtonEditar.setToolTipText("Editar nota selecionada.");
+        jButtonEditar.setEnabled(false);
+        jButtonEditar.setMaximumSize(new java.awt.Dimension(33, 33));
+        jButtonEditar.setMinimumSize(new java.awt.Dimension(33, 33));
+        jButtonEditar.setPreferredSize(new java.awt.Dimension(33, 33));
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/2_action_search.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(33, 33));
+        jLabel1.setMinimumSize(new java.awt.Dimension(33, 33));
+        jLabel1.setPreferredSize(new java.awt.Dimension(33, 33));
+        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,33 +152,33 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSplitPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAdiciona, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAdiciona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSalva, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeleta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 107, Short.MAX_VALUE)))
+                        .addComponent(jButtonSalva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonDeleta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButtonDeleta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonSalva, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonAdiciona, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonDeleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSalva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAdiciona, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextFieldTitulo)
                         .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -158,6 +191,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jButtonAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionaActionPerformed
         adicionarNota();
+        jTextPaneConteudo.setEditable(false);
     }//GEN-LAST:event_jButtonAdicionaActionPerformed
 
     private void jListTituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListTituloMouseClicked
@@ -166,11 +200,38 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jButtonDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletaActionPerformed
         excluirItemSelecionado();
+        
+        jButtonEditar.setEnabled(true);
+        jButtonSalva.setEnabled(false);
+        jButtonDeleta.setEnabled(false);
+        jTextPaneConteudo.setEditable(false);
     }//GEN-LAST:event_jButtonDeletaActionPerformed
 
     private void jButtonSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvaActionPerformed
         atualizarItemSelecionado();
+        
+        jButtonEditar.setEnabled(true);
+        jButtonSalva.setEnabled(false);
+        jButtonDeleta.setEnabled(false);
+        jTextPaneConteudo.setEditable(false);
     }//GEN-LAST:event_jButtonSalvaActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        getItemSelecionado();
+        
+        jButtonEditar.setEnabled(false);
+        jButtonSalva.setEnabled(true);
+        jButtonDeleta.setEnabled(true);
+        jTextPaneConteudo.setEditable(true);
+
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jTextFieldTituloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusGained
+        if (jTextFieldTitulo.getText().isEmpty()) {
+            jTextPaneConteudo.setText("");
+        }
+        jButtonEditar.setEnabled(false);
+    }//GEN-LAST:event_jTextFieldTituloFocusGained
 
     /**
      * @param args the command line arguments
@@ -216,7 +277,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneConteudo;
     // End of variables declaration//GEN-END:variables
 
-    public final void listarNotas() {
+    @SuppressWarnings("UseOfObsoleteCollectionType")
+    private void listarNotas() {
         ControladorNota controladorNota = new ControladorNota();
 
         jListTitulo.setListData(new Vector(controladorNota.listar()));
@@ -224,7 +286,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         jListTitulo.setPreferredSize(new java.awt.Dimension(150, (controladorNota.listar().size() * 21)));
     }
 
-    public final void listarNotas(String str) {
+    @SuppressWarnings("UseOfObsoleteCollectionType")
+    private void listarNotas(String str) {
         ControladorNota controladorNota = new ControladorNota();
 
         jListTitulo.setListData(new Vector(controladorNota.listar(str)));
@@ -232,28 +295,55 @@ public class FormPrincipal extends javax.swing.JFrame {
         jListTitulo.setPreferredSize(new java.awt.Dimension(150, (controladorNota.listar().size() * 21)));
     }
 
-    public final void addEventoTextChange() {
-        
-        // Listen for changes in the text
+    private void addEventoTextChange() {
+
+        // Listen para mudanças no jTextFieldBusca
         jTextFieldBusca.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
-                // text was changed
+                // texto foi alterado
                 listarNotas(jTextFieldBusca.getText());
             }
 
             public void removeUpdate(DocumentEvent e) {
-                // text was deleted
+                // texto foi deletado
                 listarNotas(jTextFieldBusca.getText());
             }
 
             public void insertUpdate(DocumentEvent e) {
-                // text was inserted
+                // texto foi inserido
                 listarNotas(jTextFieldBusca.getText());
+            }
+        });
+
+        // Listen para mudanças no jTextFieldTitulo
+        jTextFieldTitulo.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                // texto foi alterado
+                enableBtnAdicionar();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                // texto foi deletado
+                enableBtnAdicionar();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                // texto foi inserido
+                enableBtnAdicionar();
             }
         });
     }
 
-    public void adicionarNota() {
+    private void enableBtnAdicionar() {
+        if (jTextFieldTitulo.getText().isEmpty()) {
+            jButtonAdiciona.setEnabled(false);
+        } else {
+            jButtonAdiciona.setEnabled(true);
+            jTextPaneConteudo.setEditable(true);
+        }
+    }
+
+    private void adicionarNota() {
         ControladorNota controladorNota = new ControladorNota();
 
         Nota nota = new Nota();
@@ -268,21 +358,34 @@ public class FormPrincipal extends javax.swing.JFrame {
         controladorNota.adicionar(nota);
 
         jTextFieldTitulo.setText("");
-
+        jTextPaneConteudo.setEditable(true);
+        
         listarNotas();
+
+        jListTitulo.setSelectedIndex(0);
+
+        getItemSelecionado();
     }
 
-    public final void getItemSelecionado() {
+    private void getItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
             Nota nota;
 
             nota = (Nota) jListTitulo.getSelectedValue();
-            jTextPaneConteudo.setText(String.valueOf(nota.getConteudo()));
+            jTextPaneConteudo.setText(nota.getConteudo());
+
+            jTextFieldTitulo.setText("");
+
+            jButtonEditar.setEnabled(true);
+            jButtonAdiciona.setEnabled(false);
+            jButtonSalva.setEnabled(false);
+            jButtonDeleta.setEnabled(false);
+            jTextPaneConteudo.setEditable(false);
         }
     }
 
-    public final void excluirItemSelecionado() {
+    private void excluirItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
             ControladorNota controladorNota = new ControladorNota();
@@ -297,19 +400,21 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public final void atualizarItemSelecionado() {
+    private void atualizarItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
             ControladorNota controladorNota = new ControladorNota();
-
+            
+            int tempIndex = jListTitulo.getSelectedIndex();
+            
             Nota nota = (Nota) jListTitulo.getSelectedValue();
-
             nota.setConteudo(jTextPaneConteudo.getText());
+            
             controladorNota.atualizar(nota);
 
             listarNotas();
-
-            jTextPaneConteudo.setText("");
+            jListTitulo.setSelectedIndex(tempIndex);
+            getItemSelecionado();
         }
     }
 }
