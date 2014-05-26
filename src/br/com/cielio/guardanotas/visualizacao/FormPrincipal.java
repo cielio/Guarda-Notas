@@ -81,6 +81,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jScrollPaneJTextPane);
 
         jTextFieldTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jTextFieldTitulo.setText("Digite aqui o Título da Nota.");
         jTextFieldTitulo.setToolTipText("Digite um nome para a nota.");
         jTextFieldTitulo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -88,7 +89,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonAdiciona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_new.png"))); // NOI18N
+        jButtonAdiciona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagems/5_content_new.png"))); // NOI18N
         jButtonAdiciona.setToolTipText("Adicionar nota.");
         jButtonAdiciona.setEnabled(false);
         jButtonAdiciona.setPreferredSize(new java.awt.Dimension(33, 33));
@@ -98,7 +99,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonDeleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_remove.png"))); // NOI18N
+        jButtonDeleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagems/5_content_remove.png"))); // NOI18N
         jButtonDeleta.setToolTipText("Excluir nota.");
         jButtonDeleta.setEnabled(false);
         jButtonDeleta.setMaximumSize(new java.awt.Dimension(33, 33));
@@ -110,7 +111,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonSalva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_save.png"))); // NOI18N
+        jButtonSalva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagems/5_content_save.png"))); // NOI18N
         jButtonSalva.setToolTipText("Salvar alterações.");
         jButtonSalva.setEnabled(false);
         jButtonSalva.setMaximumSize(new java.awt.Dimension(33, 33));
@@ -125,7 +126,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTextFieldBusca.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jTextFieldBusca.setToolTipText("Pesquisar");
 
-        jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/5_content_edit1.png"))); // NOI18N
+        jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagems/5_content_edit1.png"))); // NOI18N
         jButtonEditar.setToolTipText("Editar nota selecionada.");
         jButtonEditar.setEnabled(false);
         jButtonEditar.setMaximumSize(new java.awt.Dimension(33, 33));
@@ -137,7 +138,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/2_action_search.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagems/2_action_search.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(33, 33));
         jLabel1.setMinimumSize(new java.awt.Dimension(33, 33));
         jLabel1.setPreferredSize(new java.awt.Dimension(33, 33));
