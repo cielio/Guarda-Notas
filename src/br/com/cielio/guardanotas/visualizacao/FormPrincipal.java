@@ -7,6 +7,7 @@ package br.com.cielio.guardanotas.visualizacao;
 
 import br.com.cielio.guardanotas.controle.ControladorNota;
 import br.com.cielio.guardanotas.modelo.Nota;
+import java.awt.Color;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.event.DocumentEvent;
@@ -81,11 +82,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jScrollPaneJTextPane);
 
         jTextFieldTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jTextFieldTitulo.setText("Digite aqui o Título da Nota.");
-        jTextFieldTitulo.setToolTipText("Digite um nome para a nota.");
+        jTextFieldTitulo.setForeground(java.awt.Color.lightGray);
+        jTextFieldTitulo.setText("Título da Nota.");
+        jTextFieldTitulo.setToolTipText("Digite aqui o Título da Nota.");
         jTextFieldTitulo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldTituloFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldTituloFocusLost(evt);
             }
         });
 
@@ -201,7 +206,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jButtonDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletaActionPerformed
         excluirItemSelecionado();
-        
+
         jButtonEditar.setEnabled(true);
         jButtonSalva.setEnabled(false);
         jButtonDeleta.setEnabled(false);
@@ -210,7 +215,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jButtonSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvaActionPerformed
         atualizarItemSelecionado();
-        
+
         jButtonEditar.setEnabled(true);
         jButtonSalva.setEnabled(false);
         jButtonDeleta.setEnabled(false);
@@ -219,7 +224,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         getItemSelecionado();
-        
+
         jButtonEditar.setEnabled(false);
         jButtonSalva.setEnabled(true);
         jButtonDeleta.setEnabled(true);
@@ -228,11 +233,26 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jTextFieldTituloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusGained
-        if (jTextFieldTitulo.getText().isEmpty()) {
+       
+        jButtonEditar.setEnabled(false);
+        
+        if (jTextFieldTitulo.getText().trim().isEmpty()) {
             jTextPaneConteudo.setText("");
         }
-        jButtonEditar.setEnabled(false);
+        
+        if (jTextFieldTitulo.getText().equals("Título da Nota.")) {
+            jTextFieldTitulo.setText("");
+            jTextFieldTitulo.setForeground(Color.black);
+        }
     }//GEN-LAST:event_jTextFieldTituloFocusGained
+
+    private void jTextFieldTituloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusLost
+        
+        if (jTextFieldTitulo.getText().trim().isEmpty()) {
+            jTextFieldTitulo.setText("Título da Nota.");
+            jTextFieldTitulo.setForeground(Color.lightGray);
+        }
+    }//GEN-LAST:event_jTextFieldTituloFocusLost
 
     /**
      * @param args the command line arguments
@@ -336,7 +356,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
 
     private void enableBtnAdicionar() {
-        if (jTextFieldTitulo.getText().isEmpty()) {
+        if (jTextFieldTitulo.getText().trim().isEmpty()
+                | jTextFieldTitulo.getText().equals("Título da Nota.")) {
+
             jButtonAdiciona.setEnabled(false);
         } else {
             jButtonAdiciona.setEnabled(true);
@@ -360,7 +382,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jTextFieldTitulo.setText("");
         jTextPaneConteudo.setEditable(true);
-        
+
         listarNotas();
 
         jListTitulo.setSelectedIndex(0);
@@ -405,12 +427,12 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         if (jListTitulo.getSelectedIndex() > -1) {
             ControladorNota controladorNota = new ControladorNota();
-            
+
             int tempIndex = jListTitulo.getSelectedIndex();
-            
+
             Nota nota = (Nota) jListTitulo.getSelectedValue();
             nota.setConteudo(jTextPaneConteudo.getText());
-            
+
             controladorNota.atualizar(nota);
 
             listarNotas();
