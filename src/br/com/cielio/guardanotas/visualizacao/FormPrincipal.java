@@ -8,6 +8,10 @@ package br.com.cielio.guardanotas.visualizacao;
 import br.com.cielio.guardanotas.controle.ControladorNota;
 import br.com.cielio.guardanotas.modelo.Nota;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.event.DocumentEvent;
@@ -38,6 +42,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuConteudo = new javax.swing.JPopupMenu();
+        jMenuItemCopiar = new javax.swing.JMenuItem();
+        jMenuItemColar = new javax.swing.JMenuItem();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPaneJListTitulo = new javax.swing.JScrollPane();
         jListTitulo = new javax.swing.JList();
@@ -51,6 +58,24 @@ public class FormPrincipal extends javax.swing.JFrame {
         jButtonEditar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        jMenuItemCopiar.setText("Copiar");
+        jMenuItemCopiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItemCopiarMouseReleased(evt);
+            }
+        });
+        jPopupMenuConteudo.add(jMenuItemCopiar);
+
+        jMenuItemColar.setText("Colar");
+        jMenuItemColar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItemColarMouseReleased(evt);
+            }
+        });
+        jPopupMenuConteudo.add(jMenuItemColar);
+
+        jPopupMenuConteudo.getAccessibleContext().setAccessibleParent(jTextPaneConteudo);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Guarda Notas");
         setBackground(new java.awt.Color(153, 204, 255));
@@ -61,6 +86,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jListTitulo.setBackground(new java.awt.Color(248, 248, 248));
         jListTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jListTitulo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListTitulo.setAutoscrolls(false);
         jListTitulo.setMaximumSize(new java.awt.Dimension(3000, 30000));
         jListTitulo.setMinimumSize(new java.awt.Dimension(100, 100));
@@ -77,6 +103,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTextPaneConteudo.setEditable(false);
         jTextPaneConteudo.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jTextPaneConteudo.setPreferredSize(new java.awt.Dimension(6, 400));
+        jTextPaneConteudo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTextPaneConteudoMouseReleased(evt);
+            }
+        });
         jScrollPaneJTextPane.setViewportView(jTextPaneConteudo);
 
         jSplitPane1.setRightComponent(jScrollPaneJTextPane);
@@ -233,13 +264,13 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jTextFieldTituloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusGained
-       
+
         jButtonEditar.setEnabled(false);
-        
+
         if (jTextFieldTitulo.getText().trim().isEmpty()) {
             jTextPaneConteudo.setText("");
         }
-        
+
         if (jTextFieldTitulo.getText().equals("Título da Nota.")) {
             jTextFieldTitulo.setText("");
             jTextFieldTitulo.setForeground(Color.black);
@@ -247,12 +278,49 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTituloFocusGained
 
     private void jTextFieldTituloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusLost
-        
+
         if (jTextFieldTitulo.getText().trim().isEmpty()) {
             jTextFieldTitulo.setText("Título da Nota.");
             jTextFieldTitulo.setForeground(Color.lightGray);
         }
     }//GEN-LAST:event_jTextFieldTituloFocusLost
+
+    private void jTextPaneConteudoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextPaneConteudoMouseReleased
+
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable contents = clipboard.getContents(this);
+        //Liga ou desliga o botao colar, se caso estiver texto na area de trasferencia ou se estiver vazio
+        if (contents == null | !contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+            jMenuItemColar.setEnabled(false);
+        } else {
+            jMenuItemColar.setEnabled(true);
+        }
+        //Liga ou desliga o botao copiar, se caso estiver texto selecionado
+        if (jTextPaneConteudo.getSelectedText() != null) {
+            jMenuItemCopiar.setEnabled(true);
+        } else {
+            jMenuItemCopiar.setEnabled(false);
+        }
+
+        //Ativa o menu copiar e colar
+        if (evt.isPopupTrigger()) {
+            jPopupMenuConteudo.show(jTextPaneConteudo, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTextPaneConteudoMouseReleased
+
+    private void jMenuItemCopiarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemCopiarMouseReleased
+        jTextPaneConteudo.copy();
+    }//GEN-LAST:event_jMenuItemCopiarMouseReleased
+
+    private void jMenuItemColarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemColarMouseReleased
+        
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable contents = clipboard.getContents(this);
+        if (contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+            jTextPaneConteudo.paste();
+        } 
+        
+    }//GEN-LAST:event_jMenuItemColarMouseReleased
 
     /**
      * @param args the command line arguments
@@ -290,6 +358,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSalva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jListTitulo;
+    private javax.swing.JMenuItem jMenuItemColar;
+    private javax.swing.JMenuItem jMenuItemCopiar;
+    private javax.swing.JPopupMenu jPopupMenuConteudo;
     private javax.swing.JScrollPane jScrollPaneJListTitulo;
     private javax.swing.JScrollPane jScrollPaneJTextPane;
     private javax.swing.JSplitPane jSplitPane1;
@@ -393,10 +464,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void getItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
-            Nota nota;
 
-            nota = (Nota) jListTitulo.getSelectedValue();
+            Nota nota = (Nota) jListTitulo.getSelectedValue();
             jTextPaneConteudo.setText(nota.getConteudo());
+            jTextPaneConteudo.setCaretPosition(0);
 
             jTextFieldTitulo.setText("");
 
@@ -405,12 +476,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             jButtonSalva.setEnabled(false);
             jButtonDeleta.setEnabled(false);
             jTextPaneConteudo.setEditable(false);
+
         }
     }
 
     private void excluirItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
+
             ControladorNota controladorNota = new ControladorNota();
 
             Nota nota = (Nota) jListTitulo.getSelectedValue();
@@ -420,12 +493,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             listarNotas();
 
             jTextPaneConteudo.setText("");
+
         }
     }
 
     private void atualizarItemSelecionado() {
 
         if (jListTitulo.getSelectedIndex() > -1) {
+
             ControladorNota controladorNota = new ControladorNota();
 
             int tempIndex = jListTitulo.getSelectedIndex();
@@ -438,6 +513,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             listarNotas();
             jListTitulo.setSelectedIndex(tempIndex);
             getItemSelecionado();
+
         }
     }
 }
