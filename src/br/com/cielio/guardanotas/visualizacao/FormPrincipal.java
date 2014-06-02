@@ -14,6 +14,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -236,11 +237,18 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jListTituloMouseClicked
 
     private void jButtonDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletaActionPerformed
-        excluirItemSelecionado();
+
+        int resposta = JOptionPane.showConfirmDialog(null, "Excluir a nota selecionada?", "Excluir", 
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // verifica se o usuário clicou no botão YES
+        if (resposta == JOptionPane.YES_OPTION) {
+            
+            excluirItemSelecionado();
+        }
 
         jButtonEditar.setEnabled(true);
         jButtonSalva.setEnabled(false);
-        jButtonDeleta.setEnabled(false);
         jTextPaneConteudo.setEditable(false);
     }//GEN-LAST:event_jButtonDeletaActionPerformed
 
@@ -249,7 +257,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jButtonEditar.setEnabled(true);
         jButtonSalva.setEnabled(false);
-        jButtonDeleta.setEnabled(false);
+        
         jTextPaneConteudo.setEditable(false);
     }//GEN-LAST:event_jButtonSalvaActionPerformed
 
@@ -258,7 +266,6 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jButtonEditar.setEnabled(false);
         jButtonSalva.setEnabled(true);
-        jButtonDeleta.setEnabled(true);
         jTextPaneConteudo.setEditable(true);
 
     }//GEN-LAST:event_jButtonEditarActionPerformed
@@ -266,15 +273,19 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jTextFieldTituloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusGained
 
         jButtonEditar.setEnabled(false);
-
+        jButtonDeleta.setEnabled(false);
+        
+        
+        jTextFieldTitulo.setForeground(Color.black);
+        if (jTextFieldTitulo.getText().equals("Título da Nota.")) {
+            jTextFieldTitulo.setText("");       
+        }
+        
         if (jTextFieldTitulo.getText().trim().isEmpty()) {
             jTextPaneConteudo.setText("");
         }
 
-        if (jTextFieldTitulo.getText().equals("Título da Nota.")) {
-            jTextFieldTitulo.setText("");
-            jTextFieldTitulo.setForeground(Color.black);
-        }
+
     }//GEN-LAST:event_jTextFieldTituloFocusGained
 
     private void jTextFieldTituloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTituloFocusLost
@@ -313,13 +324,13 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCopiarMouseReleased
 
     private void jMenuItemColarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemColarMouseReleased
-        
+
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         Transferable contents = clipboard.getContents(this);
         if (contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
             jTextPaneConteudo.paste();
-        } 
-        
+        }
+
     }//GEN-LAST:event_jMenuItemColarMouseReleased
 
     /**
@@ -469,12 +480,10 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTextPaneConteudo.setText(nota.getConteudo());
             jTextPaneConteudo.setCaretPosition(0);
 
-            jTextFieldTitulo.setText("");
-
             jButtonEditar.setEnabled(true);
             jButtonAdiciona.setEnabled(false);
             jButtonSalva.setEnabled(false);
-            jButtonDeleta.setEnabled(false);
+            jButtonDeleta.setEnabled(true);
             jTextPaneConteudo.setEditable(false);
 
         }
